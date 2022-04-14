@@ -9,9 +9,11 @@
     "build-watch": "vue-cli-service build-watch"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.6",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "vue-axios": "^3.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import axios from 'axios'
   export default {
     name: 'app',
     data() {
@@ -151,17 +152,27 @@
       getbv () {
         chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
           var bv = tabs[0].url.match(/[\s\S]*(BV[a-z|A-Z|0-9]{10})[\s\S]*/)[1];
-          var aidModel = "https://api.bilibili.com/x/web-interface/archive/stat?bvid="
-          console.log(aidModel + bv);
-          var xhr = new XMLHttpRequest();
-          xhr.open("GET", aidModel + bv);
-          xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4) {
-              var aid = JSON.parse(xhr.responseText).data.aid;
-              console.log(aid);
-            }
-          }
-          xhr.send();
+          var aidModel = "https://api.bilibili.com/x/web-interface/archive/stat?bvid=";
+          var cidModel = "https://api.bilibili.com/x/player/pagelist?bvid=";
+          let requests = [];
+          let getAid = new Promise((resolve) => {
+            axios({method: "GET", url: aidModel + bv}).then(res => resolve(res));
+          });
+          requests.push(getAid);
+          let getCid = new Promise((resolve) => {
+            axios({method: "GET", url: cidModel + bv}).then(res => resolve(res));
+          });
+          requests.push(getCid);
+          Promise.all(requests).then((replist) => {
+            var aid = replist[0].data.data.aid;
+            var cid = replist[1].data.data[0].cid;
+            var req = "https://api.bilibili.com/x/player/playurl?avid="+ aid +"&cid="+ cid +"&qn=1&type=&otype=json&platform=html5&high_quality=1";
+            axios({method: "GET", url: req}).then((res) => {
+              var videoURL = res.data.data.durl[0].url;
+              console.log(videoURL);
+              chrome.downloads.download({url: videoURL, saveAs: true});
+            });
+          });
         });
       }
 
