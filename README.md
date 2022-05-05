@@ -15,3 +15,6 @@ npm run build
 npm run watch
 ```
 
+## 使用
+
+将`/dist`在**开发者模式下**拖入Chrome即可
