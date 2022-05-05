@@ -43,12 +43,15 @@ instance.find({ type: 'http' }, function (service) {
 ### Initializing
 
 ```js
-var instance = new Bonjour({ options })
+var instance = new Bonjour({ options }, errorCallback)
 ```
 
 The `options` are optional and will be used when initializing the
 underlying multicast-dns server. For details see [the multicast-dns
 documentation](https://github.com/mafintosh/multicast-dns#mdns--multicastdnsoptions).
+
+`errorCallback` is an optional callback used to gracefully handle errors that would otherwise
+crash the process. While not being strictly required, providing this is highly recommended
 
 ### Publishing
 

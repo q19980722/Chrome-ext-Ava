@@ -24,29 +24,18 @@ const plugins = [
     to: path.resolve("dist/assets")  
   },
 ]
-  // process.env.NODE_ENV === "production"
-  //   ? [
-  //       {
-  //         from: path.resolve("src/manifest.production.json"),
-  //         to: `${path.resolve("dist")}/manifest.json`
-  //       }
-  //     ]
-  //   : [
-  //       {
-  //         from: path.resolve("src/manifest.development.json"),
-  //         to: `${path.resolve("dist")}/manifest.json`
-  //       }
-  //     ];
 
 module.exports = {
   pages: pagesObj,
   configureWebpack: {
     entry: {
-     background: "./src/js/background.js"
+     background: "./src/js/background.js",
+     content: "./src/content/index.js"
     },
     output: {
      filename: "js/[name].js"
     },
-    plugins: [CopyWebpackPlugin(plugins)]
+    plugins: [new CopyWebpackPlugin({patterns: plugins})],
+    devtool: 'inline-source-map'
   }
 };

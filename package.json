@@ -1,19 +1,19 @@
 {
-  "name": "test",
+  "name": "ext",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "watch": "vue-cli-service build --watch",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "build-watch": "vue-cli-service build-watch"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "axios": "^0.26.1",
+    "@element-plus/icons-vue": "^1.1.4",
+    "axios": "^0.27.2",
     "core-js": "^3.8.3",
-    "element-ui": "^2.15.6",
-    "vue": "^2.6.14",
-    "vue-axios": "^3.4.1"
+    "element-plus": "^2.1.11",
+    "vue": "^3.2.13"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -21,11 +21,9 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "copy-webpack-plugin": "^4.6.0",
+    "copy-webpack-plugin": "6.0.2",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
-    "vue-cli-plugin-chrome-ext": "~0.0.5",
-    "vue-template-compiler": "^2.6.14"
+    "eslint-plugin-vue": "^8.0.3"
   },
   "eslintConfig": {
     "root": true,
@@ -34,7 +32,7 @@
       "webextensions": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/vue3-essential",
       "eslint:recommended"
     ],
     "parserOptions": {
@@ -45,6 +43,7 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not dead"
+    "not dead",
+    "not ie 11"
   ]
 }

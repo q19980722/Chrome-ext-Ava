@@ -1,17 +1,11 @@
-import Vue from "vue";
-import AppComponent from "./App/App.vue";
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import { createApp } from 'vue'
+import App from './App/App.vue'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-Vue.component("app-component", AppComponent);
-Vue.use(ElementUI)
-Vue.use(VueAxios, axios)
-
-new Vue({
-  el: "#app",
-  render: createElement => {
-    return createElement(AppComponent);
-  }
-});
+const app = createApp(App)
+for(const icon in ElementPlusIconsVue) {
+    app.component(icon, ElementPlusIconsVue[icon])
+}
+app.use(ElementPlus).mount('#app')
